@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <script src="methods.js"></script>
+    <title>Document</title>
+    <style>
+        #outerdiv{
+            background-color: rgb(160, 81, 81);
+        }
+        #transactions{
+            float: left;
+            color: wheat;
+            border: 2px solid black;
+            width: 30%;
+            margin: 2%;
+        }
+        #options_list{
+            font-size: 25px;
+        }
+        #option_div{
+            float: right;
+            width: 60%;
+            margin: 2%;
+            border: 2px solid green;
+        }
+        #create_customer,#customer_details,#transaction,#delete_customer{
+            margin: 10px 20px;
+            border: 2px solid red;
+            /* display: none; */
+        }
+        input{
+            margin-bottom: 20px;
+            outline: none;
+        }
+        input{
+            width: 50%;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        input[type="text"],input[type="number"]{
+            border: none;
+            border-bottom: 1px solid white;
+            background: transparent;
+            height: 40px; 
+            outline: none;
+            color: white;
+        }
+        button{
+            border: 1px solid red;
+            border-radius: 10px;
+            font-size: 22px;
+            margin-left: 10%;
+            cursor: pointer;
+            background-color: rgb(160, 81, 81);
+        }
+        button:hover{
+            opacity: 0.7;
+        }
+        /* @media screen and (max-width: 935px) {
+            #outerdiv{
+                display: flex;
+                flex-direction: column;
+            }
+            
+        } */
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <p id="screen" >Screen size</p>
+            <h1>coMake<span style="color: tomato;">IT </span><img src="./bank.jfif" style="height: 30px; width: 30px;"> Banking System</h1>
+        </div>
+        
+        <div class="navbar">
+            <a href="home.html">Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+            <a href="login.html" id="login">Login</a>
+            <a href="#" id="right" onclick="sign_out()">Sign Out</a>
+        </div>
+        <h1 id="message" style="text-align: center;">This is home page</h1>
+        <div id="outerdiv">
+            <div id="transactions">
+                <h2 style="text-align: center;">Bank transactions</h2>
+                <ol id="options_list" >
+                    <li>Create Customer</li>
+                    <li>Transaction</li>
+                    <li>Customer Details</li>
+                    <li>Delete Customer</li>
+                </ol>
+            </div>
+            <div id="option_div">
+                <div style="border: 2px solid red;margin: 10px 20px;padding-left: 4%;">
+                    <label style="color:wheat">Choose one option</label>
+                    <input id="selected_option" type="number" min="1" max="4" style="outline: none;margin: 10px auto;width: 100px;">
+                    <label id="invalid_input_message" style="visibility:hidden;color: red;">Invalid input</label>
+                </div>
+                <div id="create_customer" style="background-color: black;padding: 4%;">
+                    <form onsubmit="createCustomer()">
+                        <h2 style="margin: 0;color: wheat;">Create customer details</h2>
+                        <input type="text" id="cname" name="" placeholder="Enter customer name" required="required"><br>
+                        <input type="text" id="acctype" name="" placeholder="Enter Account type" required="required"><br>
+                        <input type="number" id="accno" name="" placeholder="Enter Account number" required="required"><br>
+                        <input type="number" id="bal" name="" placeholder="Enter Balance" required="required"><br>
+                        <button id="add_customer" name="">Add Customer</button><br>
+                    </form>
+                </div>
+                <div id="customer_details" style="background-color: black;padding: 4%;">
+                    <form onsubmit="getDetails()">
+                        <input type="number" id="accno_details" name="" placeholder="Enter Account number" required="required"><br>
+                        <button id="get_details" name="" >Get Details</button><br> 
+                        <h2 style="margin: 0;color: wheat;" id="customer_details_header"></h2>
+                        <p id="customer_name"></p>
+                        <p id="customer_accno"></p>
+                        <p id="customer_balance"></p>
+                        <p id="customer_acctype"></p>
+                    </form>
+                </div>
+                <div id="transaction" style="background-color: black;padding: 4%;">
+                    <h2 style="margin: 0;color: wheat;">Transaction</h2>
+                    <form onsubmit="transaction_submit()">
+                        <input type="number" id="taccno" name="" placeholder="Enter Account number" required="required"><br>
+                        <input type="text" id="tacctype" name="" placeholder="Enter transaction type w/d" required="required"><br>
+                        <input type="number" id="tamt" name="" placeholder="Enter transaction amount" required="required"><br>
+                        <button id="transaction_btn" name="">Click here</button><br>
+                    </form>
+                </div>
+                <div id="delete_customer" style="background-color: black;padding: 4%;">
+                    <form onsubmit="deleteDetails()">
+                        <input type="number" id="delete_accno" name="" placeholder="Enter Account number" required="required"><br>
+                        <button id="delete_details" name="">Delete Customer</button><br> 
+                    </form>
+                    <h2 style="margin: 0;color: wheat;" id="customer_details_header"></h2>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <!-- <div style="margin: 20px 40px;background-color: chocolate;text-align: center;">
+            <div>
+                <label>Choose one option</label>
+                <select>
+                    <option>-select-</option>
+                    <option>create customer</option>
+                    <option>delete customer</option>
+                    <option>customer details</option>
+                    <option>transaction</option>
+                </select>
+                <br><br>
+                <label>You have selected :</label>
+            </div>
+            <div id="selected_div">
+                <h2 style="margin: 0;">Create customer details</h2>
+            </div>
+        </div> -->
+        <div style="position: relative;box-sizing: border-box;height: 80px;"></div>
+        <div class="footer">
+            <h2>&copy;Copyrights, All Rights Reserved</h2>
+        </div>
+    </div>
+    <script>
+        getWindowSize();
+        window.addEventListener("resize",getWindowSize);
+        var selected_option = document.getElementById("selected_option");
+        selected_option.addEventListener("change",function(){
+            if(selected_option.value > 4 || selected_option.value <1){
+                document.getElementById("invalid_input_message").style.visibility = "visible";
+            }
+            else{
+                document.getElementById("invalid_input_message").style.visibility = "hidden";
+                // alert("valid input");
+            }
+        });
+
+        if(localStorage.getItem("username")==undefined || localStorage.getItem("password")==undefined){
+            document.getElementById("right").style.display = "none";
+            document.getElementById("login").style.display = "block";
+            alert("login to go to home page...")
+            window.location = "login.html";
+        }
+        else{
+            document.getElementById("login").style.display = "none";
+            document.getElementById("message").innerHTML = "Welcome back ,"+localStorage.getItem("username");
+            document.getElementById("right").style.display = "block";
+        }
+        
+    </script>
+</body>
+</html>

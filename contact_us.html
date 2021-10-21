@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <script src="methods.js"></script>
+    <title>Document</title>
+    <style>
+        .card{
+            width: 320px;
+            height: 330px;
+            background-color: wheat;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <p id="screen" ></p>
+            <h1>coMake<span style="color: tomato;">IT  </span><img src="./bank.jfif" style="height: 30px; width: 30px;"> Banking System</h1>
+        </div>
+        
+        <div class="navbar">
+            <a href="home.html" >Home</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+            <a href="login.html" id="login">Login</a>
+            <a href="#" id="right" onclick="sign_out()">Sign Out</a>
+        </div>
+        <h1 id="message" style="text-align: center;">This is Contact us page</h1>
+        <div class="card">
+
+        </div>
+        <div style="position: relative;box-sizing: border-box;height: 80px;"></div>
+        <div class="footer">
+            <h2>&copy;Copyrights, All Rights Reserved</h2>
+        </div>
+    </div>
+    <script>
+        // getWindowSize();
+        // window.addEventListener("resize",getWindowSize);
+
+        if(localStorage.getItem("username")==undefined || localStorage.getItem("password")==undefined){
+            document.getElementById("right").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
+        else{
+            document.getElementById("login").style.display = "none";
+            // document.getElementById("message").innerHTML = "Welcome back ,"+localStorage.getItem("username");
+            document.getElementById("right").style.display = "block";
+        }
+
+    </script>
+</body>
+</html>
